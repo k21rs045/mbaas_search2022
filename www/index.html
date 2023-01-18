@@ -57,6 +57,25 @@
         })
     }
 
+    function deleteData() {
+        let TestDataClass = ncmb.DataStore(db);
+      TestDataClass.fetch()
+        .then(function(results){
+            return results.delete();
+        })
+        .then(function(results) {
+          $("#display").removeClass();
+          $("#display").addClass("text-light");
+          $("#display").addClass("bg-primary");
+          $("#display").html("delete success");
+        })
+        .catch(function(error) {
+          $("#display").removeClass();
+          $("#display").addClass("bg-warning");
+          $("#display").html("delete fail:" + JSON.stringify(error));
+        })
+    }
+
     function showResults(results) {
       // テーブルのヘッダを生成
     let msg = "<table><tr><th>subject</th><th>month</th><th>day</th><th>hour</th></tr>";
@@ -89,6 +108,7 @@
   <div id="button">
     <button class="btn" onclick="fetchAll()">表示</button>
     <button class="btn" onclick="countData()">個数</button>
+    <button class="btn" onclick="deleteData()">削除</button>
     <br>
     <button class="btn" onclick="searchLevel()">日付検索</button>
     <button class="btn" onclick="searchName()">科目検索</button>
