@@ -17,16 +17,16 @@
 
     function fetchAll() {
       let TestDataClass = ncmb.DataStore(db);
-      TestDataClass.order("name",false).fetchAll()
+      TestDataClass.order("day",false).fetchAll()
         .then(function(results) {
           showResults(results);
         })
     }
 
     function searchName() {
-        let name = $("#name").val();
+        let level = parseInt($("#level").val());
         let TestDataClass = ncmb.DataStore(db);
-      TestDataClass.equalTo("name",name).fetchAll()
+      TestDataClass.equalTo("day",level).fetchAll()
         .then(function(results) {
           showResults(results);
         })
@@ -54,7 +54,7 @@
 
     function showResults(results) {
       // テーブルのヘッダを生成
-      let msg = "<table><tr><th>subject</th><th>month</th><th>day</th><th>hour</th></tr>";
+    let msg = "<table><tr><th>subject</th><th>month</th><th>day</th><th>hour</th></tr>";
       for (let i = 0; i < results.length; i++) {
         // 各データを収めた表の列を生成
         msg += "<tr>";
@@ -74,11 +74,11 @@
 <body>
   <h1>mBaaS search</h1>
   <div>
-    <label for="name">name:</label>
-    <input id="name" type="text" placeholder="科目名">
+    <label for="subject">subject:</label>
+    <input id="subject" type="text" placeholder="科目名">
   </div>
   <div>
-    <label for="level">level:</label>
+    <label for="level">day:</label>
     <input id="level" type="number" placeholder="monster level">
   </div>
   <div>
@@ -87,7 +87,7 @@
   </div>
   <div id="button">
     <button class="btn" onclick="fetchAll()">表示</button>
-    <button class="btn" onclick="searchName()">課題</button>
+    <button class="btn" onclick="searchName()">検索</button>
     <button class="btn" onclick="enterData()">登録</button>
   </div>
   <div id="message">message area</div>
