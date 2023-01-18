@@ -41,6 +41,22 @@
         })
     }
 
+    function countData() {
+        let TestDataClass = ncmb.DataStore(db);
+      TestDataClass.count().fetchAll()
+      .then(function(results) {
+          $("#message").removeClass();
+          $("#message").addClass("text-light");
+          $("#message").addClass("bg-primary");
+          $("#message").html(results.count);
+        })
+        .catch(function(error) {
+          $("#message").removeClass();
+          $("#message").addClass("bg-warning");
+          $("#message").html("delete fail:" + JSON.stringify(error));
+        })
+    }
+
     function showResults(results) {
       // テーブルのヘッダを生成
     let msg = "<table><tr><th>subject</th><th>month</th><th>day</th><th>hour</th></tr>";
@@ -70,13 +86,9 @@
     <label for="level">day:</label>
     <input id="level" type="number" placeholder="monster level">
   </div>
-  <div>
-    <label for="assignment">assignment:</label>
-    <input id="assignment" type="text" placeholder="assignment">
-  </div>
   <div id="button">
     <button class="btn" onclick="fetchAll()">表示</button>
-    <button class="btn" onclick="enterData()">登録</button>
+    <button class="btn" onclick="countData()">個数</button>
     <br>
     <button class="btn" onclick="searchLevel()">日付検索</button>
     <button class="btn" onclick="searchName()">科目検索</button>
