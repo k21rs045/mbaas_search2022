@@ -33,9 +33,9 @@
     }
 
     function searchName() {
-        let level = parseInt($("#level").val());
+        let subject = $("#subject").val();
         let TestDataClass = ncmb.DataStore(db);
-      TestDataClass.equalTo("level",level).fetchAll()
+      TestDataClass.equalTo("subject",subject).fetchAll()
         .then(function(results) {
           showResults(results);
         })
